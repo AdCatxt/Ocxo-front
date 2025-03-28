@@ -8,11 +8,11 @@ interface NavItemProps {
     path: string
 }
 
-const NavItem = ({ icon, path  }: NavItemProps) => {
+const NavItem = ({ icon, path }: NavItemProps) => {
     const pathName = usePathname();
     return (
-        <Link href={path} className={pathName === path ? 'bg-red-600 w-full flex justify-center transition-colors' : ''}>
-            {icon}
+        <Link href={path} className='w-full flex justify-center'>
+            <span className={pathName === path ? 'bg-red-600 w-8/12 flex justify-center rounded-md transition-colors' : 'justify-center w-8/12'}>{icon}</span>
         </Link>
     )
 }

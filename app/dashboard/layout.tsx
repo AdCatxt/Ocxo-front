@@ -1,8 +1,12 @@
 import Header from "./_components/Header";
 import Sidebar from "./_components/_sidebar/Sidebar";
 
-export default function LayoutDashboard({ children, }: Readonly<{
+export default function LayoutDashboard({
+    children,
+    count
+}: Readonly<{
     children: React.ReactNode;
+    count: React.ReactNode;
 }>) {
     return (
         <div className='bg-red-50'>
@@ -10,6 +14,7 @@ export default function LayoutDashboard({ children, }: Readonly<{
             <div className='flex flex-row'>
                 <Sidebar />
                 {children}
+                {count}
             </div>
         </div>
     );
