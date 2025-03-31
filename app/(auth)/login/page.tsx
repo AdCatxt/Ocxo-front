@@ -1,23 +1,33 @@
 'use client';
-import { Button, Input } from "@heroui/react";
+import { Button, Input, Spinner } from "@heroui/react";
 import { Link } from '@heroui/react'
 import { API_URL } from "@/constants";
 import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+    const [submitting, setSubmitting] = useState(false)
+    const router = useRouter()
     const handleSubmit = async (e: React.FormEvent) => {
+        setSubmitting(true);
         e.preventDefault()
         const formData = new FormData(e.target);
         let authData: any = {}
         authData.userEmail = formData.get('userEmail');
         authData.userPassword = formData.get('userPassword');
-        const { data } = await axios.post(`${API_URL}/auth/login`, {
-            ...authData
-        }, {
-            withCredentials: true,
+        try {
+            const response = await axios.post(`${API_URL}/auth/login`, {
+                ...authData
+            }, {
+                withCredentials: true,
 
-        });
-        console.log(authData)
+            });
+            if (response.status === 201) router.push('/dashboard')
+            setSubmitting(false)
+        } catch (e) {
+            setSubmitting(false)
+        }
         return
     }
 
@@ -29,7 +39,12 @@ export default function LoginPage() {
                 < Input label='Contraseña' name='userPassword' type='password' isRequired={true} size='sm' />
             </div>
             <div className='flex flex-col items-center gap-2'>
-                <Button color='primary' type='submit'>Iniciar Sesión</Button>
+                <Button
+                    color='primary'
+                    type='submit'
+                    disabled={submitting}>
+                    {submitting ? 'Enviando...' : 'Iniciar Sesión'}
+                </Button>
                 <div className='flex items-center gap-1'>
                     <p className='text-white'>¿No tienes cuenta?</p>
                     <Link href='/singup' className='underline'>Registrate</Link>
