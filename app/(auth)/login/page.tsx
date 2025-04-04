@@ -28,7 +28,7 @@ export default function LoginPage() {
         } catch (e) {
             setSubmitting(false)
         }
-        return
+        return;
     }
 
     return (
