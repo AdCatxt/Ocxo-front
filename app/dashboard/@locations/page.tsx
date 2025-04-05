@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { Location } from '@/entities';
 import SelectLocation from './_components/SelectLocation';
 import { API_URL, TOKEN_NAME } from '@/constants';
+import LocationCard from "./_components/LocationCard";
 
 const LocationsPage = async ({searchParams}: {
     searchParams: { [key: string]: string | string[] | undefined } 
@@ -28,6 +29,9 @@ const LocationsPage = async ({searchParams}: {
             <div className='w-1/2'>
                 <SelectLocation locations={data} store={searchParams?.store} />
             </div>
+                <div className='w-8/12'>
+                    <LocationCard store={searchParams.store}/>
+                </div>
         </div>
     </div>)
 }
