@@ -4,9 +4,10 @@ import { Location } from '@/entities';
 import SelectLocation from './_components/SelectLocation';
 import { API_URL, TOKEN_NAME } from '@/constants';
 import LocationCard from "./_components/LocationCard";
+import FormNewLocation from "./_components/FormNewLocation";
 
-const LocationsPage = async ({searchParams}: {
-    searchParams: { [key: string]: string | string[] | undefined } 
+const LocationsPage = async ({ searchParams }: {
+    searchParams: { [key: string]: string | string[] | undefined }
 }) => {
     const userCookies = cookies()
     const token = userCookies.get(TOKEN_NAME)?.value
@@ -15,23 +16,24 @@ const LocationsPage = async ({searchParams}: {
             Authorization: `Bearer ${token}`
         }
     })
-    
+
     data = [{
-            locationId: 0,
-            locationName: 'Selecciona una tienda',
-            locationLatLng: [0, 0],
-            locationAddress: 'No hay'
+        locationId: 0,
+        locationName: 'Selecciona una tienda',
+        locationLatLng: [0, 0],
+        locationAddress: 'No hay'
     },
     ...data
-]
+    ]
     return (<div className='w-8/12'>
         <div className='w-full flex flex-col items-center h-[90vh] bg-red-100'>
             <div className='w-1/2'>
                 <SelectLocation locations={data} store={searchParams?.store} />
             </div>
-                <div className='w-8/12'>
-                    <LocationCard store={searchParams.store}/>
-                </div>
+            <div className='w-8/12'>
+                <LocationCard store={searchParams.store} />
+            </div>
+            <FormNewLocation />
         </div>
     </div>)
 }
