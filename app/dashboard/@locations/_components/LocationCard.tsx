@@ -1,5 +1,4 @@
 import { Location } from "@/entities";
-import axios from "axios";
 import { Card, CardBody, CardHeader, Divider } from "@heroui/react";
 import { API_URL } from "@/constants";
 import Link from "next/link";
@@ -7,11 +6,16 @@ import { authHeaders } from "@/helpers/authHeaders";
 
 export default async function LocationCard({ store }: { store: string | string[] | undefined }) {
     if (!store) return null;
-    const { data } = await axios.get<Location>(`${API_URL}/locations/${store}`, {
+    const respose = await fetch(`${API_URL}/locations/${store}`, {
         headers: {
             ...authHeaders()
+        },
+        next: {
+            tags: ['dashboard:locations', `dahsboard:locations:${store}`]
+
         }
     })
+    const data: Location = await respose.json()
     return (
         <Card>
             <CardHeader className='text-2xl'>
