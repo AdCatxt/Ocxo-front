@@ -1,21 +1,20 @@
 import { Button, Input } from "@heroui/react";
 import { createLocation } from "@/actions/locations/create";
 import axios from "axios";
-import { API_URL, TOKEN_NAME } from "@/constants";
-import { cookies } from "next/headers";
+import { API_URL } from "@/constants";
 import SelectManager from "./SelectManager";
+import { authHeaders } from "@/helpers/authHeaders";
 
 export default async function FormNewLocation({store}: {store: string | string[] | undefined}) {
     if (store) return null;
-    const token = cookies().get(TOKEN_NAME)?.value
     const responseManagers = await axios.get(`${API_URL}/managers`, {
         headers: {
-            Authorization: `Bearer ${token}`
+            ...authHeaders(),
         }
     })
     const responseLocation = await axios.get(`${API_URL}/locations`, {
         headers: {
-            Authorization: `Bearer ${token}`
+            ...authHeaders()
         }
     })
     return (
