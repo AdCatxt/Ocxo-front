@@ -20,8 +20,8 @@ export default async function EmployeesLocation({ store }: { store: string | str
             </CardHeader>
             <Divider />
             <CardBody>
-                <p className='w-full'>Email: <b>employee.employeePhone</b></p>
-                <p className='w-full'>Email: <b>employee.employeeEmail</b></p>
+                <p className='w-full'><b>Teléfono: </b> {employee.employeePhone}</p>
+                <p className='w-full'><b>Email: </b>{employee.employeeEmail}</p>
             </CardBody>
         </Card>
     })

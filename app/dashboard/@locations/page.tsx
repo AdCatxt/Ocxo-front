@@ -5,6 +5,7 @@ import SelectLocation from './_components/SelectLocation';
 import { API_URL, TOKEN_NAME } from '@/constants';
 import LocationCard from "./_components/LocationCard";
 import FormNewLocation from "./_components/FormNewLocation";
+import DeleteLocationButton from "./_components/DeleteLocationButton";
 
 const LocationsPage = async ({ searchParams }: {
     searchParams: { [key: string]: string | string[] | undefined }
@@ -19,7 +20,7 @@ const LocationsPage = async ({ searchParams }: {
 
     data = [{
         locationId: 0,
-        locationName: 'Selecciona una tienda',
+        locationName: 'Crear tienda nueva',
         locationLatLng: [0, 0],
         locationAddress: 'No hay'
     },
@@ -33,7 +34,10 @@ const LocationsPage = async ({ searchParams }: {
             <div className='w-8/12'>
                 <LocationCard store={searchParams.store} />
             </div>
-            <FormNewLocation />
+            <div className='w-5/12'>
+                <FormNewLocation store={searchParams.store}/>
+            </div>
+            <DeleteLocationButton store={searchParams.store} />
         </div>
     </div>)
 }
