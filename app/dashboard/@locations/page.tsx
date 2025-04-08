@@ -2,6 +2,8 @@ import { Location } from '@/entities';
 import SelectLocation from './_components/SelectLocation';
 import { API_URL } from '@/constants';
 import LocationCard from "./_components/LocationCard";
+import FormUpdateLocation from "./_components/FormUpdateLocation";
+import UpdateLocation from "./_components/UpdateLocation";
 import FormNewLocation from "./_components/FormNewLocation";
 import DeleteLocationButton from "./_components/DeleteLocationButton";
 import { authHeaders } from "@/helpers/authHeaders";
@@ -36,9 +38,12 @@ const LocationsPage = async ({ searchParams }: {
                 <LocationCard store={searchParams.store} />
             </div>
             <div className='w-5/12'>
-                <FormNewLocation store={searchParams.store}/>
+                <FormNewLocation store={searchParams.store} />
             </div>
             <DeleteLocationButton store={searchParams.store} />
+            <UpdateLocation>
+                <FormUpdateLocation store={searchParams.store} />
+            </UpdateLocation>
         </div>
     </div>)
 }
